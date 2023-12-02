@@ -1,6 +1,6 @@
 class Line :
     def __init__(self, string) -> None:
-        self.string=string
+        self.string=string.rstrip("\n")
         self.first=string[0]
     
     def find_digits(self):
