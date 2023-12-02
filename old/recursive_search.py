@@ -22,17 +22,17 @@ print(graph_dict)
 
 print("Duration : ", (time.perf_counter()-start)*1000, " ms")
 
-R="khgdsfurellj5sefxjtsevenfour35pxohne"
+R="khgdsfurzsfour"
 
 def search_graph(sub_dict, text):
     global C
-    if len(text)==0: return False
-    elif None in sub_dict.keys():
+    #if len(text)==0: return False
+    if None in sub_dict.keys():
         if sub_dict[None]==None: return True
     else:
         if text[0] in sub_dict.keys() and search_graph(sub_dict[text[0]],text[1:]):
             print(text[0])
-            C+=text[0] 
+            C=text[0]+C
             return True
         else: return False
 
@@ -46,7 +46,7 @@ def xsearch(sub_dict, text):
             break
     return (check,i)
 
-print(xsearch(graph_dict, R),C[::-1])
+print(xsearch(graph_dict, R),C)
 
 exit(0)
 

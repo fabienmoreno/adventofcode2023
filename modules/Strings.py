@@ -37,8 +37,8 @@ class Line :
         except:
             raise Exception("No number found")
 
-    def find_words(self, words, position, direction):
-        text=self.string[position::1]
+    def find_words(self, words, direction):
+        text=self.string[0::1]
         if direction == 1:
             min=len(text)+1
             wmin=""
@@ -66,6 +66,53 @@ class Line :
             if wmax!="": return (max,wmax)
             else: return (-1,"")
 
+    def find_words2(self, words, direction):
+        text=self.string[0::1]
+        if direction==-1:
+            words=[w[::-1] for w in words ]
+            text=text[::-1]
+
+        #Génération du dictionnaire représentant un graph
+        def build_dict(sub_dict, word):
+            if len(word)==1:
+                if word in sub_dict.keys():
+                    sub_dict[word][None]=None
+                else: sub_dict[word]={None:None}
+            else:
+                if word[0] not in sub_dict.keys(): sub_dict[word[0]]={}
+                sub_dict[word[0]]=build_dict(sub_dict[word[0]],word[1:])
+            return sub_dict
+        
+        graph_dict={}
+        for w in words:
+            graph_dict=build_dict(graph_dict,w)
+
+        def search_graph(sub_dict, text):
+            global C
+            if None in sub_dict.keys():
+                if sub_dict[None]==None: return True
+            else:
+                if text[0] in sub_dict.keys() and search_graph(sub_dict[text[0]],text[1:]):
+                    C=text[0]+C
+                    return True
+                else: return False
+        
+        def xsearch(sub_dict, text):
+            global C
+            C=""
+            check=False
+            for i in range(len(text)):
+                if search_graph(graph_dict,text[i:]):
+                    check=True
+                    break
+            return (check,i)
+
+        result=xsearch(graph_dict, text)
+        if result[0]:
+            return (result[1], C[::direction])
+        else: raise Exception("No value found")
+
+
 class Game:
     def __init__(self, string) -> None:
         self.string=string.rstrip("\n")
@@ -92,7 +139,7 @@ class Game:
             for i in I:
                 l=Line(i)
                 nb_d=l.find_first_number()
-                col_d=l.find_words(words,0,1)[1]
+                col_d=l.find_words(words,1)[1]
                 d_dict[count_draw][col_d]=nb_d
             count_draw+=1
         return d_dict
@@ -109,7 +156,7 @@ class Game:
             for i in I:
                 l=Line(i)
                 nb_d=l.find_first_number()
-                col_d=l.find_words(words,0,1)[1]
+                col_d=l.find_words(words,1)[1]
                 d_dict[col_d]=nb_d
             for w in words: c_dict[w].append(d_dict[w])
         return c_dict

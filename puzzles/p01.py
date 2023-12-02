@@ -19,9 +19,9 @@ def part2(filename):
         total=0
         for line in input:
             l=Line(line)
-            first = l.find_words(W,0,1)[1]
+            first = l.find_words2(W,1)[1]
             if first in S: first=Sdir[first]
-            last = l.find_words(W,0,-1)[1]
+            last = l.find_words(W,-1)[1]
             if last in S: last=Sdir[last]
             first_last=first + last
             total+=int(first_last)
