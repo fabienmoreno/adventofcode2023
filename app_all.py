@@ -11,3 +11,9 @@ print("Result Day 01 / Part 1 : ", result, " Duration : ", (time.perf_counter()-
 start=time.perf_counter()
 result=p01.part2(filename)
 print("Result Day 01 / Part 2 : ", result, " Duration : ", (time.perf_counter()-start)*1000, " ms")
+
+#Day 2 - Part 1
+start=time.perf_counter()
+filename = "data/input_02.txt"
+result=p02.part1(filename)
+print("Result Day 01 / Part 2 : ", result, " Duration : ", (time.perf_counter()-start)*1000, " ms")
