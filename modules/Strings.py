@@ -67,10 +67,9 @@ class Line :
             else: return (-1,"")
 
     def find_words2(self, words, direction):
-        text=self.string[0::1]
+        text=self.string[0::direction]
         if direction==-1:
-            words=[w[::-1] for w in words ]
-            text=text[::-1]
+            words=[w[::-1] for w in words]
 
         #Génération du dictionnaire représentant un graph
         def build_dict(sub_dict, word):
@@ -112,6 +111,33 @@ class Line :
             return (result[1], C[::direction])
         else: raise Exception("No value found")
 
+    def find_wordsr(self, graph_dict, direction):
+        text=self.string[::direction]
+
+        def search_graph(sub_dict, text):
+            global C
+            if None in sub_dict.keys():
+                if sub_dict[None]==None: return True
+            else:
+                if text[0] in sub_dict.keys() and search_graph(sub_dict[text[0]],text[1:]):
+                    C=text[0]+C
+                    return True
+                else: return False
+        
+        def xsearch(sub_dict, text):
+            global C
+            C=""
+            check=False
+            for i in range(len(text)):
+                if search_graph(graph_dict,text[i:]):
+                    check=True
+                    break
+            return (check,i)
+
+        result=xsearch(graph_dict, text)
+        if result[0]:
+            return (result[1], C[::direction])
+        else: raise Exception("No value found")
 
 class Game:
     def __init__(self, string) -> None:
