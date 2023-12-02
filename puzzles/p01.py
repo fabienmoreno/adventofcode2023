@@ -17,9 +17,9 @@ def part2(filename):
     W=S+D
 
     #Choose de searching method:
-    method = "Recursive" #ou "Find"
+    method = "Graph" #ou "Find"
 
-    if method=="Recursive" :
+    if method=="Graph" :
         Wr=[w[::-1] for w in W]
 
         #Génération du dictionnaire représentant un graph
