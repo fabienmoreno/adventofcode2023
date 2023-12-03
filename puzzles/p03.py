@@ -17,17 +17,19 @@ def part1(filename):
     M.insert(0, dot_line)
 
     g=Grid(M)
+    result=0
 
     #Iterate over each position
     for i in range(1,h+1):
         l=Line(M[i])
-
+        print(M[i])
         #Get all numbers
         numbers=l.get_numbers()
 
         #Scan all values
         for k in numbers.keys():
             #Check for symbol for each value
-            g.scan_symbol(numbers[k])
+            print(k)
+            if g.scan_symbol(numbers[k],i): result+=k
+    return result
 
-        print(numbers)

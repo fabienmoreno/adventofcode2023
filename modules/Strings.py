@@ -216,9 +216,26 @@ class Game:
 
 class Grid:
     def __init__(self,grid) -> None:
-        pass
+        self.grid=grid
 
-    def scan_symbol(self,coordinates):
+    def getline(self,l):
+        return self.grid[l]
+
+    def scan_symbol(self, coordinates: tuple, line):
         (position,length)=coordinates
-        valid_symbols = ['$', '@', '=', '/', '&', '#', '-', '*', '+', '%']
         
+        valid_symbols = ['$', '@', '=', '/', '&', '#', '-', '*', '+', '%']
+        invalid_symbols = '01234566789.'
+        check = False
+        #Check first on left
+        if not check and self.getline(line)[position-1] not in invalid_symbols: check=True
+        #Check first on right
+        if not check and self.getline(line)[position+length] not in invalid_symbols: check=True
+        #Check above and below
+        cursor=position-1
+        while not check and cursor < position+length+1:
+            if self.getline(line-1)[cursor] not in invalid_symbols: check=True
+            if self.getline(line+1)[cursor] not in invalid_symbols: check=True
+            cursor+=1
+        print(coordinates, check)
+        return check
