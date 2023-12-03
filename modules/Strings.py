@@ -139,6 +139,33 @@ class Line :
             return (result[1], C[::direction])
         else: raise Exception("No value found")
 
+    def get_numbers(self):
+        #Return numbers values in a dict as {value:[position,length], ...}
+        text=self.string
+        result_dict={}
+        l=len(text)
+
+        def number_lenght(text):
+            count=0
+            for i in range(len(text)):
+                j=ord(text[i])
+                if j>=48 and j<=57:
+                    count+=1
+                else: break
+            return count
+
+        i=1
+        while i < l:
+            j=ord(text[i])
+            if j>=48 and j<=57:
+                long=number_lenght(text[i:l-1])
+                value=int(text[i:i+long])
+                result_dict[value]=(i,long)
+                i+=long
+            else: i+=1
+        
+        return result_dict
+
 class Game:
     def __init__(self, string) -> None:
         self.string=string.rstrip("\n")
@@ -186,3 +213,12 @@ class Game:
                 d_dict[col_d]=nb_d
             for w in words: c_dict[w].append(d_dict[w])
         return c_dict
+
+class Grid:
+    def __init__(self,grid) -> None:
+        pass
+
+    def scan_symbol(self,coordinates):
+        (position,length)=coordinates
+        valid_symbols = ['$', '@', '=', '/', '&', '#', '-', '*', '+', '%']
+        

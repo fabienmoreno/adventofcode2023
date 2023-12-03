@@ -2,13 +2,13 @@ import time
 import importlib
 
 min_day=1
-max_day=2
-part_qty=2
+max_day=3
+part_qty=1
 
 for d in range(min_day, max_day+1):
     d_str=str(d)
     if len(d_str)==1: d_str="0"+d_str
-    filename="data/input_"+d_str+".txt"
+    filename="data_simple/input_"+d_str+".txt"
     
     module_name = "puzzles.p"+d_str
     module = importlib.import_module(module_name)
