@@ -257,3 +257,14 @@ class Card:
         draw_raw=self.raw[42:]
         L = [int(x) for x in draw_raw.split()]
         return L
+    
+    def match_score(self):
+        D=self.draw_list()
+        W=self.win_list()
+        count=0
+        for i in D:
+            if i in W: 
+                count+=1
+        if count==0: total=0
+        else: total=2**(count-1)
+        return total

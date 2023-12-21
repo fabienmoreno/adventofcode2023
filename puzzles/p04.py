@@ -5,14 +5,6 @@ def part1(filename):
         result=0
         for line in input:
             C=Card(line)
-            D=C.draw_list()
-            W=C.win_list()
-            count=0
-            for i in D:
-                if i in W: 
-                    count+=1
-            if count==0: total=0
-            else: total=2**(count-1)
-            result=result+total
+            result=result+C.match_score()
     return result
 
