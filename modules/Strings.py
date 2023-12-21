@@ -237,5 +237,23 @@ class Grid:
             if self.getline(line-1)[cursor] not in invalid_symbols: check=True
             if self.getline(line+1)[cursor] not in invalid_symbols: check=True
             cursor+=1
-        print(coordinates, check)
+        #print(coordinates, check)
         return check
+
+class Card:
+    def __init__(self,string) -> None:
+        self.raw=string.rstrip("\n")
+    
+    def number(self):
+        number=int(self.raw[4:8])
+        return number
+    
+    def win_list(self):
+        win_raw=self.raw[10:40]
+        L = [int(x) for x in win_raw.split()]
+        return L
+    
+    def draw_list(self):
+        draw_raw=self.raw[42:]
+        L = [int(x) for x in draw_raw.split()]
+        return L

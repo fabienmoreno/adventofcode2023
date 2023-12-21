@@ -22,14 +22,17 @@ def part1(filename):
     #Iterate over each position
     for i in range(1,h+1):
         l=Line(M[i])
-        print(M[i])
+        #print(M[i])
         #Get all numbers
         numbers=l.get_numbers()
 
         #Scan all values
         for k in numbers.keys():
             #Check for symbol for each value
-            print(k)
+            #print(k)
             if g.scan_symbol(numbers[k],i): result+=k
     return result
 
+def part2(filename):
+    result=0
+    return result
