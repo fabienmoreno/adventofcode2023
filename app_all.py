@@ -3,7 +3,7 @@ import importlib
 
 min_day=4
 max_day=4
-part_qty=1
+part_qty=2
 
 for d in range(min_day, max_day+1):
     d_str=str(d)
