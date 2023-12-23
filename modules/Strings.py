@@ -271,3 +271,23 @@ class Card:
         elif type=="qty":
             total=count
         return total
+
+class Map:
+    def __init__(self) -> None:
+        self.matrix={}
+    
+    def append(self, start, end, offset):
+        self.matrix[range(start, end)]=offset
+
+    def convert(self, x):
+        for r, o in self.matrix.items():
+            if x in r:
+                x=x+o
+                break
+        return x
+
+    def matrix(self):
+        return self.matrix
+
+    
+    

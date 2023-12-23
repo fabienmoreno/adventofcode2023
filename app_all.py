@@ -1,9 +1,9 @@
 import time
 import importlib
 
-min_day=4
-max_day=4
-part_qty=2
+min_day=5
+max_day=5
+part_qty=1
 
 for d in range(min_day, max_day+1):
     d_str=str(d)
