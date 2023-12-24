@@ -289,5 +289,24 @@ class Map:
     def matrix(self):
         return self.matrix
 
+class GlobalMap:
+    def __init__(self) -> None:
+        self.matrix={}
+    
+    def addlevel(self, level):
+        self.matrix[level]={}
+    
+    def append(self, level, start, end, offset):
+        self.matrix[level][range(start, end)]=offset
+
+    def convert(self, level, x):
+        for r, o in self.matrix[level].items():
+            if x in r:
+                x=x+o
+                break
+        return x
+
+    def matrix(self, level):
+        return self.matrix[level]
     
     

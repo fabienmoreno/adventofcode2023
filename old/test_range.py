@@ -17,7 +17,7 @@ seeds_dict={}
 
 for k,i in enumerate(seeds_list[0::2]):
     for j in range(int(i),int(i)+int(seeds_list[1::2][k])):
-        print(j)
         seeds_dict[j]=j
 
 print(seeds_dict)
+print(len(seeds_dict))
